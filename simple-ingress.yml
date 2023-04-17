@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wordpress-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: wordpress.192.168.125.187.sslip.io
+      http:
+        paths:
+          - path: /wordpress
+            pathType: Prefix
+            backend:
+              service:
+                name: wordpress
+                port:
+                  name: http
